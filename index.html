@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Antonym Wheel — CEFR Seviyeli İngilizce Kelime Çarkı</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#6d5efc" />
+    <link rel="icon" href="./assets/icon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">AW</div>
+          <div>
+            <h1>Antonym Wheel</h1>
+            <p class="subtitle">CEFR seviyene göre kelime öğren • Çarkı çevir • Anlamı seç • Puan kazan</p>
+          </div>
+        </div>
+
+        <div class="stats" aria-label="İstatistikler">
+          <div class="stat">
+            <div class="stat__label">Puan</div>
+            <div class="stat__value" id="scoreValue">0</div>
+          </div>
+          <div class="stat">
+            <div class="stat__label">Seri</div>
+            <div class="stat__value" id="streakValue">0</div>
+          </div>
+          <div class="stat stat--compact">
+            <div class="stat__label">Seviye</div>
+            <div class="stat__value" id="levelValue">—</div>
+          </div>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="panel">
+          <div class="panel__titleRow">
+            <h2>1) Seviye seç</h2>
+            <div class="hint">Çark, seçtiğin seviyeye göre 8 kelimeyle dolar.</div>
+          </div>
+
+          <div class="levelSelector" role="group" aria-label="Seviye seçici">
+            <button class="chip" data-level="A1" type="button">A1</button>
+            <button class="chip" data-level="A2" type="button">A2</button>
+            <button class="chip" data-level="B1" type="button">B1</button>
+            <button class="chip" data-level="B2" type="button">B2</button>
+            <button class="chip" data-level="C1" type="button">C1</button>
+            <button class="chip" data-level="C2" type="button">C2</button>
+          </div>
+
+          <div class="row">
+            <label class="toggle">
+              <input type="checkbox" id="audioToggle" checked />
+              <span>Sesli okuma</span>
+            </label>
+            <label class="toggle">
+              <input type="checkbox" id="sfxToggle" checked />
+              <span>Efekt sesleri</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="wheelArea" aria-label="Kelime çarkı">
+          <div class="wheelFrame">
+            <div class="pointer" aria-hidden="true"></div>
+            <canvas id="wheelCanvas" width="520" height="520" aria-label="Çark"></canvas>
+
+            <div class="wheelOverlay" id="wheelOverlay" aria-live="polite">
+              <div class="overlayCard">
+                <div class="overlayTitle" id="overlayTitle">Seviye seç</div>
+                <div class="overlayText" id="overlayText">Çarkı çevirmek için önce A1–C2 seviyelerinden birini seç.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <button id="spinBtn" class="btn btn--primary" type="button" disabled>
+              Çarkı Çevir
+            </button>
+            <button id="reloadBtn" class="btn" type="button" disabled>
+              Yeni 8 Kelime Getir
+            </button>
+          </div>
+
+          <div class="fineprint" id="dataSourceNote"></div>
+        </section>
+
+        <section class="resultArea" aria-label="Sonuç ve alıştırma">
+          <div class="card">
+            <div class="card__header">
+              <h2>2) Sonuç</h2>
+              <div class="pill" id="statusPill">Hazır</div>
+            </div>
+
+            <div class="resultWord">
+              <div class="label">Seçilen kelime</div>
+              <div class="wordLine">
+                <span class="word" id="pickedEnglish">—</span>
+                <button class="iconBtn" id="speakBtn" type="button" disabled title="Tekrar dinlet">
+                  Dinlet
+                </button>
+              </div>
+              <div class="subtle" id="pickedLevel"> </div>
+            </div>
+
+            <div class="revealRow">
+              <button id="revealBtn" class="btn" type="button" disabled>
+                Anlamları Göster
+              </button>
+            </div>
+
+            <div class="details" id="details" hidden>
+              <div class="grid2">
+                <div class="infoBox">
+                  <div class="infoTitle">Türkçe anlam</div>
+                  <div class="infoValue" id="pickedTurkish">—</div>
+                </div>
+                <div class="infoBox">
+                  <div class="infoTitle">Zıt anlam</div>
+                  <div class="infoValue">
+                    <span id="pickedAntonym">—</span>
+                    <span class="muted">•</span>
+                    <span id="pickedAntonymTr">—</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="infoBox">
+                <div class="infoTitle">Eş anlamlılar</div>
+                <div class="infoValue" id="pickedSynonyms">—</div>
+              </div>
+
+              <div class="quiz">
+                <div class="quizTitle">3) Doğru anlamı seç</div>
+                <div class="quizHint">İki seçenekten doğru Türkçe anlamı seç. Doğru: +10 puan, yanlış: seri sıfırlanır.</div>
+                <div class="quizOptions" id="quizOptions"></div>
+                <div class="quizFeedback" id="quizFeedback" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div>
+          <strong>İpucu:</strong> “Anlamları Göster”e basmadan önce kelimeyi tahmin etmeye çalış.
+        </div>
+        <div class="muted">TÜBİTAK seviyesinde öğrenci projesi için örnek uygulama</div>
+      </footer>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

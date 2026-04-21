@@ -1,0 +1,20 @@
+{
+  "name": "Antonym Wheel",
+  "short_name": "AntonymWheel",
+  "description": "CEFR seviyene göre İngilizce kelime (zıt/eş) öğrenme çarkı",
+  "lang": "tr-TR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#fbfbff",
+  "theme_color": "#6d5efc",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
+

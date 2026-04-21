@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Antonym Wheel Icon">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6d5efc"/>
+      <stop offset="1" stop-color="#57c7ff"/>
+    </linearGradient>
+  </defs>
+  <rect x="64" y="64" width="384" height="384" rx="96" fill="url(#g)"/>
+  <circle cx="256" cy="256" r="150" fill="rgba(255,255,255,0.22)"/>
+  <path d="M256 138a118 118 0 1 0 0 236a118 118 0 1 0 0-236Zm0 38a80 80 0 0 1 0 160a80 80 0 0 1 0-160Z" fill="rgba(255,255,255,0.92)"/>
+  <path d="M256 116l22 44h-44z" fill="rgba(31,35,48,0.92)"/>
+  <circle cx="256" cy="256" r="46" fill="rgba(255,255,255,0.95)"/>
+  <text x="256" y="272" text-anchor="middle" font-size="44" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto" font-weight="900" fill="rgba(31,35,48,0.86)">AW</text>
+</svg>
+
